@@ -6,6 +6,8 @@ class Node
   end
 end
 
+# instance_of?(Node) can be replaced with null check
+
 
 class LinkedList
   def initialize
@@ -35,6 +37,27 @@ class LinkedList
         node = node.next
     end
   end
+  
+  def is_palindrome()
+    stack = []
+    current_node = @head
+    #iterate through the list and push
+    while current_node.instance_of?(Node)
+        stack.push(current_node.val)
+        tail_node = current_node unless current_node.next.instance_of?(Node)
+        current_node = current_node.next
+    end
+    # iterate again through same list and pop
+    # Pop will fetch it from reverse order
+    current_node = @head
+    while current_node.instance_of?(Node)
+        stack.pop if stack.last == current_node.val
+        tail_node = current_node unless current_node.next.instance_of?(Node)
+        current_node = current_node.next
+    end
+    return true if stack.empty?
+    false
+end
   
   private 
    ## Recurisve reverse
